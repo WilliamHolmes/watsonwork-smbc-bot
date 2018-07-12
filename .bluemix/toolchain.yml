@@ -46,7 +46,7 @@ deploy:
     $ref: deploy.json
   service-category: pipeline
   parameters:
-    app-name: 'watsonwork-xkcd-bot'
+    app-name: 'watsonwork-smbc-bot'
     dev-space: "{{space}}"
     dev-organization: "{{organization}}"
     dev-region: "{{region}}"

@@ -1,7 +1,7 @@
 {
   "name": "watsonwork-smbc-bot",
   "version": "1.0.0",
-  "description": "An IBM Watson Workspace App to display an XKCD image for a given URL",
+  "description": "An IBM Watson Workspace App to display an SMBC image for a given URL",
   "author": "William Holmes <holmesw@ie.ibm.com>",
   "main": "index.js",
   "scripts": {
