@@ -34,5 +34,8 @@
     "watsonworkspace-bot": "^2.0.0",
     "watsonworkspace-sdk": "^2.0.0",
     "winston": "^2.4.0"
+  },
+  "engines" : {
+    "node": ">= 8"
   }
 }
