@@ -16,6 +16,7 @@ const UI = require('watsonworkspace-sdk').UI;
 app.authenticate().then(() => app.uploadPhoto('./appicon.jpg'));
 
 app.on('message-created', message => {
+    console.log('message-created', message);
     const { content = '' } = message;
     _.each(content.match(constants.regex.SMBC), url => {
         scrape(url, (err, data) => console.log('IMAGE', err, data));
