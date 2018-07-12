@@ -1,6 +1,7 @@
 const _ = require('underscore');
 // const del = require('delete');
 const got = require('got');
+const metascraper = require('metascraper');
 
 // const fs = require('fs');
 // const request = require('request');
@@ -16,10 +17,10 @@ const UI = require('watsonworkspace-sdk').UI;
 app.authenticate().then(() => app.uploadPhoto('./appicon.jpg'));
 
 app.on('message-created', message => {
-    const { content = '', spaceId } = message;
+    const { content = '' } = message;
     _.each(content.match(constants.regex.SMBC), targetUrl => {
-        const {body: html, url} = await got(targetUrl)
-        const metadata = await metascraper({ html, url })
+        const { body: html, url } = await got(targetUrl);
+        const metadata = await metascraper({ html, url });
         const { image } = metadata;
         console.log('IMAGE', image);
     });
