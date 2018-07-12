@@ -1,7 +1,6 @@
 const _ = require('underscore');
 // const del = require('delete');
-const got = require('got');
-const metascraper = require('metascraper');
+const scrape = require('html-metadata');
 
 // const fs = require('fs');
 // const request = require('request');
@@ -18,11 +17,8 @@ app.authenticate().then(() => app.uploadPhoto('./appicon.jpg'));
 
 app.on('message-created', message => {
     const { content = '' } = message;
-    _.each(content.match(constants.regex.SMBC), targetUrl => {
-        const { body: html, url } = await got(targetUrl);
-        const metadata = await metascraper({ html, url });
-        const { image } = metadata;
-        console.log('IMAGE', image);
+    _.each(content.match(constants.regex.SMBC), url => {
+        scrape(url, (err, data) => console.log('IMAGE', err, data));
     });
 });
 
