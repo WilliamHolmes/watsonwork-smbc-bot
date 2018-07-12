@@ -6,7 +6,7 @@ const constants = {
     ACTION_ID: `${ID}-smbc-share|`,
     COLOR_ERROR: '#516a92',
     regex: {
-        XKCD: /https:\/\/www.smbc-comics.com\/([0-9a-z][^\s]+)/gmi
+        SMBC: /https:\/\/(www\.)?smbc-comics.com\/([0-9a-z][^\s]+)/gmi
     },
     TEMP_DIR: './temp_files',
     BUTTON_SHARE: 'Share With Space',

@@ -1,9 +1,9 @@
 const _ = require('underscore');
-const del = require('delete');
+// const del = require('delete');
 const got = require('got');
 
-const fs = require('fs');
-const request = require('request');
+// const fs = require('fs');
+// const request = require('request');
 
 const appFramework = require('watsonworkspace-bot');
 appFramework.level('verbose');
@@ -25,5 +25,5 @@ app.on('message-created', message => {
     });
 });
 
-app.on('actionSelected', (message, annotation) => {
-});
+// app.on('actionSelected', (message, annotation) => {
+// });
