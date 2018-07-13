@@ -35,13 +35,14 @@ const postComic =  ({ url }, spaceId) => {
     });
 }
 
-const getCards = data => _.map(data.items, item => {
-    const { title, created, description, url } = item;
+const getCard = ({ title, created, description, url }) => {
     const cardTitle= strings.chompLeft(title, constants.TITLE);
     const cardBody = strings.between(description, constants.DESC_START, constants.DESC_END);
     const actionId = `${constants.ACTION_ID}${JSON.stringify({ url, title })}`;
     return UI.card(cardTitle, constants.SUB_TITLE, cardBody, [UI.cardButton(constants.BUTTON_SHARE, actionId)], created);
-});
+};
+
+const getCards = ({ items }) => _.map(items, getCard);
 
 const postCards = (message, annotation, data) => {
     app.sendTargetedMessage(message.userId, annotation, getCards(data));
