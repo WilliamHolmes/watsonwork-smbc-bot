@@ -22,10 +22,8 @@
     "watsonworkspace-ngrok": "^1.0.0"
   },
   "dependencies": {
-    "delete": "1.1.0",
     "dotenv": "^4.0.0",
-    "html-metadata": "^1.7.0",
-    "image-downloader": "3.4.1",
+    "html-metadata": "1.7.0",
     "lodash": "^4.17.4",
     "string": "3.3.3",
     "underscore": "1.8.3",
@@ -34,6 +32,7 @@
     "winston": "^2.4.0"
   },
   "engines": {
-    "node": ">= 8"
+    "node": ">= 8.11",
+    "npm": ">= 5.6"
   }
 }
