@@ -5,7 +5,8 @@
   "author": "William Holmes <holmesw@ie.ibm.com>",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "concurrently \"node ./node_modules/watsonworkspace-ngrok/index.js\" \"nodemon --inspect ./index.js\""
   },
   "keywords": [
     "watsonworkspace",
@@ -17,16 +18,18 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "concurrently": "^3.5.1",
+    "concurrently": "^3.6.0",
     "nodemon": "^1.14.11",
+    "underscore": "^1.8.3",
     "watsonworkspace-ngrok": "^1.0.0"
   },
   "dependencies": {
+    "delete": "^1.1.0",
     "dotenv": "^4.0.0",
     "html-metadata": "1.7.0",
     "lodash": "^4.17.4",
+    "rss-to-json": "^1.0.4",
     "string": "3.3.3",
-    "underscore": "1.8.3",
     "watsonworkspace-bot": "^2.0.0",
     "watsonworkspace-sdk": "^2.0.0",
     "winston": "^2.4.0"
