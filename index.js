@@ -11,10 +11,10 @@ const UI = require('watsonworkspace-sdk').UI;
 app.authenticate().then(() => app.uploadPhoto('./appicon.jpg'));
 
 app.on('message-created', message => {
-    console.log('message-created', message);
+    console.error('message created', message);
     const { content = '' } = message;
     _.each(content.match(constants.regex.SMBC), url => {
-        console.log('URL', url);
-        scrape(url).then(data => console.log('META', data));
+        console.error('URL', url);
+        scrape(url).then(data => console.error('META', data));
     });
 });
