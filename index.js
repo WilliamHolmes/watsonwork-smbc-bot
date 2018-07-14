@@ -19,7 +19,7 @@ app.authenticate().then(() => app.uploadPhoto('./appicon.jpg'));
 
 const getName = url => _.last(url.split('/'));
 
-const postComic =  ({ url }, spaceId) => {
+const postComic = ({ url }, spaceId) => {
     return scrape(url).then(data => {
         const { openGraph: { image: { url: img } } } = data;
         const dest = `${constants.TEMP_DIR}/${getName(img)}`;
@@ -78,7 +78,7 @@ const getRecentComics = (message, annotation) => {
 };
 
 const shareComic = (message, annotation, action) => {
-    const data =  JSON.parse(action);
+    const data = JSON.parse(action);
     postComic(data, message.spaceId).then(() => onComicShared(message, annotation, data)).catch(error => onComicError(message, annotation, error));
 };
 

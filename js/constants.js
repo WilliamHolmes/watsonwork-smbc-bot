@@ -18,6 +18,6 @@ const constants = {
     COMIC_SHARED: 'Shared With Space',
     DESC_START: 'Hovertext:<br/>',
     DESC_END: '</p>'
-}
+};
 
 module.exports = constants;
