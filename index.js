@@ -66,19 +66,25 @@ const onComicShared = (message, annotation, data) => {
     postAnnotation(message, annotation, `${data.title}`, constants.COMIC_SHARED);
 }
 
-app.on('message-created', message => {
+const onMessageReceived = message => {
     const { content = '', spaceId } = message;
     _.each(content.match(constants.regex.SMBC), url => postComic({ url }, spaceId));
-});
+};
 
-app.on('actionSelected:/LATEST', (message, annotation) => {
+const getRecent = (message, annotation) => {
     getFeed().then(data => postCards(message, annotation, data)).catch(error => onComicError(message, annotation, error))
-});
+};
 
-app.on('actionSelected', (message, annotation) => {
+const onActionSelected = (message, annotation) => {
     const { actionId = '' } = annotation;
     if (actionId.includes(constants.ACTION_ID)) {
         const data = JSON.parse(strings.chompLeft(actionId, constants.ACTION_ID));
         postComic(data, message.spaceId).then(() => onComicShared(message, annotation, data)).catch(error => onComicError(message, annotation, error));
     }
-});
+}
+
+app.on('message-created', onMessageReceived);
+
+app.on('actionSelected:/RECENT', getRecent);
+
+app.on('actionSelected', onActionSelected);
