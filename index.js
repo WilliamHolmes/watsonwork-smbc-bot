@@ -71,7 +71,7 @@ const onMessageReceived = message => {
     _.each(content.match(constants.regex.SMBC), url => postComic({ url }, spaceId));
 };
 
-const getRecent = (message, annotation) => {
+const getRecentComics = (message, annotation) => {
     getFeed().then(data => postCards(message, annotation, data)).catch(error => onComicError(message, annotation, error))
 };
 
@@ -85,6 +85,6 @@ const onActionSelected = (message, annotation) => {
 
 app.on('message-created', onMessageReceived);
 
-app.on('actionSelected:/RECENT', getRecent);
+app.on('actionSelected:/RECENT', getRecentComics);
 
 app.on('actionSelected', onActionSelected);
