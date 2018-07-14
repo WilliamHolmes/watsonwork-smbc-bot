@@ -74,7 +74,7 @@ const onMessageReceived = message => {
 };
 
 const getRecentComics = (message, annotation) => {
-    getFeed().then(data => postCards(message, annotation, data)).catch(error => onComicError(message, annotation, error))
+    getFeed().then(data => postCards(message, annotation, data)).catch(error => onComicError(message, annotation, error));
 };
 
 const shareComic = (message, annotation, action) => {
