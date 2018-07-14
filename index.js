@@ -33,7 +33,7 @@ const postComic =  ({ url }, spaceId) => {
             })).on('error', reject);
         });
     });
-}
+};
 
 const getCard = ({ title, created, description, url }) => {
     const cardTitle= strings.chompLeft(title, constants.TITLE);
@@ -52,19 +52,19 @@ const getFeed = () => {
     return new Promise((resolve, reject) => {
         feed.load(constants.FEED, (err, rss) => err ? reject(err) : resolve(rss));
     });
-}
+};
 
 const postAnnotation = (message, annotation, title = '', description = '') => {
     app.sendTargetedMessage(message.userId, annotation, UI.generic(title, description));
-}
+};
 
 const onComicError = (message, annotation, error) => {
     postAnnotation(message, annotation, constants.NOT_FOUND, error);
-}
+};
 
 const onComicShared = (message, annotation, data) => {
     postAnnotation(message, annotation, `${data.title}`, constants.COMIC_SHARED);
-}
+};
 
 // EVENT HANDLERS
 
@@ -80,18 +80,15 @@ const getRecentComics = (message, annotation) => {
 const shareComic = (message, annotation, action) => {
     const data =  JSON.parse(action);
     postComic(data, message.spaceId).then(() => onComicShared(message, annotation, data)).catch(error => onComicError(message, annotation, error));
-}
+};
 
 const onActionSelected = (message, annotation) => {
     const { actionId = '' } = annotation;
     if (actionId.includes(constants.ACTION_ID)) {
         const action = strings.chompLeft(actionId, constants.ACTION_ID);
-        switch (action) {
-            default:
-                return shareComic(message, annotation, action);
-        }
+        shareComic(message, annotation, action);
     }
-}
+};
 
 // EVENTS
 
