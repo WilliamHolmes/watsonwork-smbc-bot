@@ -66,6 +66,8 @@ const onComicShared = (message, annotation, data) => {
     postAnnotation(message, annotation, `${data.title}`, constants.COMIC_SHARED);
 }
 
+// EVENT HANDLERS
+
 const onMessageReceived = message => {
     const { content = '', spaceId } = message;
     _.each(content.match(constants.regex.SMBC), url => postComic({ url }, spaceId));
@@ -75,13 +77,23 @@ const getRecentComics = (message, annotation) => {
     getFeed().then(data => postCards(message, annotation, data)).catch(error => onComicError(message, annotation, error))
 };
 
+const shareComic = (message, annotation, action) => {
+    const data =  JSON.parse(action);
+    postComic(data, message.spaceId).then(() => onComicShared(message, annotation, data)).catch(error => onComicError(message, annotation, error));
+}
+
 const onActionSelected = (message, annotation) => {
     const { actionId = '' } = annotation;
     if (actionId.includes(constants.ACTION_ID)) {
-        const data = JSON.parse(strings.chompLeft(actionId, constants.ACTION_ID));
-        postComic(data, message.spaceId).then(() => onComicShared(message, annotation, data)).catch(error => onComicError(message, annotation, error));
+        const action = strings.chompLeft(actionId, constants.ACTION_ID);
+        switch (action) {
+            default:
+                return shareComic(message, annotation, action);
+        }
     }
 }
+
+// EVENTS
 
 app.on('message-created', onMessageReceived);
 
